@@ -402,7 +402,7 @@
                 this.varFecha = this.globalFunctions.maskOnlyNumbers(e, this.varFecha);
             },
             maskFecha(e){
-                var resp = this.globalFunctions.maskFecha(e, this.varFecha1);
+                var resp = this.globalFunctions.maskFecha(e, this.varFecha1, '-', 5);
                 this.varFecha1 = resp.fecha;
                 this.resultVarFecha1 = resp.tipoError + ' : ' + resp.banDate;
             },
