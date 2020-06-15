@@ -137,41 +137,45 @@ export function convertBeautifulDate(uglyDate, language){
 
 /**
  * 
- * @param {*} e $event - maskOnlyNumbers($event)
+ * @param {*} e $event - maskOnlyNumbers($event, ...
  * @param {*} fecha 
+ * @param {*} separador
  */
-export function maskOnlyNumbers(e, fecha){
-    if (fecha == '/' || fecha == '//' || fecha == '///' || fecha == '////' || fecha == '/////' || fecha == '//////' || fecha == '///////') {
+export function maskOnlyNumbers(e, fecha, separador){
+    fecha = fecha.substring(0,7);
+    if (fecha == separador || fecha == separador + separador || fecha == separador + separador + separador || fecha == separador + separador + separador + separador || fecha == separador + separador + separador + separador + separador || fecha == separador + separador + separador + separador + separador + separador || fecha == separador + separador + separador + separador + separador + separador + separador) {
         fecha = '';
     }
-    var arrayFec = fecha.split('/');
+    var arrayFec = (fecha.length>3&&fecha.length<8?fecha.split(separador, 2):fecha.split());
     if (arrayFec.length == 1 || arrayFec.length == 2) {
         arrayFec[0] = arrayFec[0].replace(/[^0-9]/g, '') + '';
+        if (arrayFec[0] === '00') {
+            arrayFec[0] = '01';
+        }
+        if (arrayFec[0] > 1 && arrayFec[0] < 10) {
+            arrayFec[0] = arrayFec[0].replace('0', '');
+            arrayFec[0] = '0' + arrayFec[0];
+        }
+        if (+arrayFec[0] > 12) {
+            arrayFec[0] = '12';
+        }
     }
     if (arrayFec.length == 2) {
         arrayFec[1] = arrayFec[1].replace(/[^0-9]/g, '') + '';
     }
-    fecha = arrayFec.join('/');
+    fecha = (fecha.length==3?arrayFec.join(separador) + separador:arrayFec.join(separador));
     const fec = fecha;
     const lengh = fecha.length;
-    if (lengh > 2 && fecha.search('/') == -1) {
-        if (lengh > 7) {
-            fecha = fec.substring(0, 2) + '/' + fec.substring(3, 7);
-        } else {
-            fecha = fec.substring(0, 2) + '/' + fec.substring(3, lengh);
-        }
+    if (lengh > 2 && fecha.search(separador) == -1) {
+        fecha = fec.substring(0, 2) + separador + fec.substring(3, lengh);
     } else {
-        if (lengh > 7) {
-            fecha = fecha.substring(0, 7);
-        } else {
-            if (e != undefined && (e.keyCode == 8 || e.key == 'Backspace')) {
-                if (lengh == 2) {
-                    fecha = fecha.substring(0, lengh -1);
-                }
-            } else{
-                if (lengh == 2) {
-                    fecha = fecha + '/';
-                }
+        if (e != undefined && (e.keyCode == 8 || e.key == 'Backspace')) {
+            if (lengh == 2) {
+                fecha = fecha.substring(0, lengh -1);
+            }
+        } else{
+            if (lengh == 2) {
+                fecha = fecha + separador;
             }
         }
     }
