@@ -103,7 +103,7 @@
   display
     block inline inline-block none table table-row table-cell
 
-  float
+  float 
     float: none;
     none left right
 
