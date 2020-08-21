@@ -5,8 +5,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    resultado: 0
   },
   mutations: {
+    setResultado(state, entrada){
+      state.resultado = entrada;
+    }
   },
   actions: {
   },

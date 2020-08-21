@@ -7,6 +7,7 @@ import Misterio6174 from '../views/Misterio6174.vue'
 import Palindromo from '../views/Palindromo.vue'
 import Fibonacci from '../views/Fibonacci.vue'
 import ImagenMap from '../views/ImagenMap.vue'
+import Calculadora from '../views/Calculadora.vue'
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,11 @@ const routes = [
     path: '/Misterio6174',
     name: 'Misterio6174',
     component: Misterio6174
+  },
+  {
+    path: '/Calculadora',
+    name: 'Calculadora',
+    component: Calculadora
   },
   {
     path: '/about',

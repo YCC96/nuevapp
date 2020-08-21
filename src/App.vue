@@ -9,6 +9,7 @@
       <router-link to="/Palindromo">Palíndromo</router-link> |
       <router-link to="/Fibonacci">Fibonacci</router-link> |
       <router-link to="/ImagenMap">ImagenMap</router-link> |
+      <router-link to="/Calculadora">Calculadora</router-link> |
     </div>
     <router-view/>
   </div>
