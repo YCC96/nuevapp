@@ -8,6 +8,7 @@ import Palindromo from '../views/Palindromo.vue'
 import Fibonacci from '../views/Fibonacci.vue'
 import ImagenMap from '../views/ImagenMap.vue'
 import Calculadora from '../views/Calculadora.vue'
+import Login from '../views/Login.vue';
 
 Vue.use(VueRouter)
 
@@ -51,6 +52,11 @@ const routes = [
     path: '/Calculadora',
     name: 'Calculadora',
     component: Calculadora
+  },
+  {
+    path: '/Login',
+    name: 'Login',
+    component: Login
   },
   {
     path: '/about',

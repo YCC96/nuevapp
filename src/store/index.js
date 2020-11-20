@@ -12,6 +12,11 @@ export default new Vuex.Store({
       state.resultado = entrada;
     }
   },
+  getters:{
+    getResultado: state => {
+      return state.resultado
+    }
+  },
   actions: {
   },
   modules: {
