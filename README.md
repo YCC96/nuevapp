@@ -1,4 +1,4 @@
-# nuevapp
+# Proyecto pruebas
 
 ## Project setup
 ```
@@ -13,6 +13,11 @@ npm run serve
 ### Compiles and minifies for production
 ```
 npm run build
+```
+
+### empaquetar con java
+```
+jar -cvf "proyectoPruebas.war" *
 ```
 
 ### Lints and fixes files
