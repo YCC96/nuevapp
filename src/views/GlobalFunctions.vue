@@ -526,6 +526,8 @@
                 this.onlyTextJS = this.globalFunctions.onlyText(this.onlyTextJS);
             },
             withoutSpaceIF(){
+                // realizan lo mismo
+                //this.withoutSpaceIF = this.withoutSpaceIF.trim();
                 this.withoutSpaceIF = this.globalFunctions.withoutSpaceIF(this.withoutSpaceIF);
             }
         }
