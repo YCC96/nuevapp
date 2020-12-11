@@ -60,6 +60,14 @@ export function onlyAlphanumericAddress(textValidar){
     return textValidar.replace(/[^a-zA-Z0-9 .,]/g, '');
 }
 
+export function withoutSpaceI(textValidar){
+    return textValidar.replace(/^[\s\uFEFF\xA0]+$/g, '');
+}
+
+export function withoutSpaceIF(textValidar){
+    return textValidar.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
+}
+
 /**
  * 
  * @param {*} e $event - maskPercent($event)

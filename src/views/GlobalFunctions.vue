@@ -118,7 +118,7 @@
             </div>
             <div class="col-4">
                 <label for="">Texto</label><br>
-                <input class="form-control" type="text" placeholder="Letras" v-model="onlyTextJS"  @keyup="onlyTextJSF">
+                <input class="form-control" type="text" placeholder="Letras" v-model="onlyTextJS">
             </div>
             <div class="col-4">
                 <label for="">Alphanumeric</label><br>
@@ -131,12 +131,12 @@
                 <input class="form-control" type="text" placeholder="Números" v-model="onlyAlphanumericAdressJS" @keyup="onlyAlphanumericAdressJSF">
             </div>
             <div class="col-4">
-                <label for=""></label><br>
-                <input class="form-control" type="text">
+                <label for="">Sin espacios al inicio</label><br>
+                <input class="form-control" type="text" v-model="withoutSpaceInit">
             </div>
             <div class="col-4">
-                <label for=""></label><br>
-                <input class="form-control" type="text">
+                <label for="">Sin espacios al inicio y al final</label><br>
+                <input class="form-control" type="text" v-model="withoutSpaceIF">
             </div>
         </div>
         <hr>
@@ -395,6 +395,8 @@
                 resultado1: 0,
                 numero3: 0,          
                 resultado2: '',
+                withoutSpaceInit: '',
+                withoutSpaceIF: '',
             }
         },
         methods: {
@@ -499,9 +501,6 @@
             onlyNumberJS(){
                 this.onlyNumbersJS = this.globalFunctions.onlyNumber(this.onlyNumbersJS);
             },
-            onlyTextJSF(){
-                this.onlyTextJS = this.globalFunctions.onlyText(this.onlyTextJS);
-            },
             onlyAlphanumericJSF(){
                 this.onlyAlphanumericJS = this.globalFunctions.onlyAlphanumeric(this.onlyAlphanumericJS);
             },
@@ -519,6 +518,15 @@
             var2(){
                 this.var2Mask = '';
                 this.var2Mask = '$ ' + this.globalFunctions.numberFormat(this.var2.replace('$ ', ''), 2, '.', ',');
+            },
+            withoutSpaceInit(){
+                this.withoutSpaceInit = this.globalFunctions.withoutSpaceI(this.withoutSpaceInit);
+            },
+            onlyTextJS(){
+                this.onlyTextJS = this.globalFunctions.onlyText(this.onlyTextJS);
+            },
+            withoutSpaceIF(){
+                this.withoutSpaceIF = this.globalFunctions.withoutSpaceIF(this.withoutSpaceIF);
             }
         }
     }
