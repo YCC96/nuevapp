@@ -27,3 +27,8 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### deploy firebase
+```
+firebase deploy --only hosting:validaciones-vue-5e15b
+```

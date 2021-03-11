@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "validaciones-vue-5e15b",
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
