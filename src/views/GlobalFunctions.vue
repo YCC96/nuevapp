@@ -73,6 +73,22 @@
                 <input class="form-control" type="text" v-model="resultVarFecha1" readonly>
             </div>
         </div>
+        <div class="row">
+            <div class="col-4">
+                <label for="">Mask phone number</label><br>
+                <input class="form-control" type="text" v-model="varMaskPhone" name="maskPhone" data-format="(***) ***-****" data-mask="(###) ###-####">
+            </div>
+            <div class="col-4">
+                <label for="">Mask date</label><br>
+                <!--
+                <input class="form-control" type="text" v-model="varMaskDate" name="maskDate" data-format-d="**/****" data-mask-d="##/####">
+                    -->
+            </div>
+            <div class="col-4">
+                <label for="">bbbb</label><br>
+                <input class="form-control" type="text">
+            </div>
+        </div>
 
         <hr>
         <hr>
@@ -335,6 +351,7 @@
     import SecureLS from 'secure-ls';
     import Datepicker from 'vue2-datepicker';
     import 'vue2-datepicker/index.css';
+    import maskFuntion from '../js/Mask';
 
     export default {
         name: 'GlobalFunctions',
@@ -397,9 +414,19 @@
                 resultado2: '',
                 withoutSpaceInit: '',
                 withoutSpaceIF: '',
+                varMaskPhone: '',
+                varMaskDate: '',
             }
         },
+        mounted(){
+            this.initMask();
+        },
         methods: {
+            initMask(){
+                const mask = document.querySelectorAll('[data-mask]');
+                console.log('*_* maask: ', mask);
+                maskFuntion(mask, 'data-format', 'data-mask');
+            },
             maskOnlyNumbers(e){
                 this.varFecha = this.globalFunctions.maskOnlyNumbers(e, this.varFecha, '/');
             },

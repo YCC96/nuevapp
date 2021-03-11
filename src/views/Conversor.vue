@@ -25,14 +25,93 @@
                 </div>
             </div>        
         </div>
+
+        <br>
+        <br>
+        <br>
+        <div class="jumbotron">
+            <h1>Conversor CSV to JSON</h1>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col">
+                    <input class="form-control" type="file" name="" id="file">
+                </div>
+                <div class="col">
+                    <button class="btn btn-outline-primary" @click="convertCsvToJson()">Convertir</button>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <label for="">Ingresa los nodos</label>
+                    <input class="form-control" type="text" v-model="headersCsvToJson">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <textarea class="form-control" v-model="dataCsvToJson" cols="30" rows="10"></textarea>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <textarea class="form-control" v-model="dataCsv" cols="30" rows="10"></textarea>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="jumbotron">
+            <h1>Conversor CSV to JSON pryect verbs english</h1>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col">
+                    <input class="form-control" type="file" name="" id="file1">
+                </div>
+                <div class="col">
+                    <button class="btn btn-outline-primary" @click="convertCsvToJson1()">Convertir</button>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <label for="">Ingresa los nodos</label>
+                    <input class="form-control" type="text" v-model="headersCsvToJson1">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <textarea class="form-control" v-model="dataCsvToJson1" cols="30" rows="10"></textarea>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <textarea class="form-control" v-model="dataCsv1" cols="30" rows="10"></textarea>
+                </div>
+            </div>
+        </div>
+        <br>
     </div>
 </template>
 
 <script>
+    import * as globalFunctions from '../utils/GlobalFunctions';
+
     export default {
       name:'Conversor',
       data() {
           return {
+            globalFunctions: globalFunctions,
+            dataCsvToJson: '',
+            headersCsvToJson: 'id,espanol,ingles,presente,persona3,pasado,participio,formaIng,type',
+            dataCsv: '',
+            dataCsvToJson1: '',
+            headersCsvToJson1: 'id,espanol,presente,persona3,pasado,futuro,participio,formaIng,type',
+            dataCsv1: '',
             selectUM1: '',
             selectUM2: '',
             var1: '',
@@ -359,29 +438,64 @@
           this.selectUM2 = 4;
       },
       methods: {
-          convertir1(){
-            console.log('*_*: ', this.selectUM1, this.selectUM2, this.equivalencias);
-              
-            try {
-                var a = this.equivalencias.filter(equiv => {
-                    let l = equiv.id + '';
-                    return l.includes(this.selectUM1);
-                });
-    
-                var aa = a[0].equiv.filter(equiv => {
-                    let l = equiv.id + '';
-                    return l.includes(this.selectUM2);
-                });
-    
-                this.var2 = this.var1 * +aa[0].value;
+        convertir1(){
+        console.log('*_*: ', this.selectUM1, this.selectUM2, this.equivalencias);
             
-            } catch (error) {
-                console.log('*_* error: ', error);
-                this.var2 = '-----';
-                //this.selectUM2 = '-';
-            }
-            
-          }
+        try {
+            var a = this.equivalencias.filter(equiv => {
+                let l = equiv.id + '';
+                return l.includes(this.selectUM1);
+            });
+
+            var aa = a[0].equiv.filter(equiv => {
+                let l = equiv.id + '';
+                return l.includes(this.selectUM2);
+            });
+
+            this.var2 = this.var1 * +aa[0].value;
+        
+        } catch (error) {
+            console.log('*_* error: ', error);
+            this.var2 = '-----';
+            //this.selectUM2 = '-';
+        }
+        
+        },
+        convertCsvToJson(){
+            var files = document.getElementById('file')
+            var file = files.files[0];
+            console.log('*_*: ', file);
+            this.readFile(file).then(data => {
+                //let listHeaders = ['id','espanol','ingles','presente', 'persona3', 'pasado', 'participio', 'infinitivo', 'tipo'];headersCsvToJson
+                this.dataCsv = data;
+                let listHeaders = this.headersCsvToJson.split(',');
+                this.dataCsvToJson = JSON.stringify(this.globalFunctions.csvToJson(data, listHeaders), undefined, 4);
+                console.log('*_* read: ', data, this.dataCsvToJson);
+            });
+
+        },
+        convertCsvToJson1(){
+            var files = document.getElementById('file1')
+            var file = files.files[0];
+            console.log('*_*: ', file);
+            this.readFile(file).then(data => {
+                //let listHeaders = ['id','espanol','ingles','presente', 'persona3', 'pasado', 'participio', 'infinitivo', 'tipo'];headersCsvToJson
+                this.dataCsv1 = data;
+                let listHeaders = this.headersCsvToJson1.split(',');
+                this.dataCsvToJson1 = JSON.stringify(this.globalFunctions.csvToJson(data, listHeaders), undefined, 4);
+                console.log('*_* read: ', data, this.dataCsvToJson1);
+            });
+
+        },
+        readFile(file) {
+            return new Promise ((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = function() {
+                    resolve(reader.result);
+                }
+                reader.readAsText(file);
+            });
+        }
       },
     }
 </script>
